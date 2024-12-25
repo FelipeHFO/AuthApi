@@ -1,0 +1,34 @@
+# Ignore build output directories
+bin/
+obj/
+
+# User-specific files
+.vs/
+.idea/
+.vscode/
+
+# User-specific files (Windows)
+Thumbs.db
+Desktop.ini
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Ignore ASP.NET temporary files
+aspnet_client/
+
+# Ignore the directory used by Visual Studio for packages
+.vs2019/
+
+# Ignore directories created by dotnet CLI
+.dnu/
+.dnx/
+
+# Rider
+.idea/
+
+# JetBrains
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
