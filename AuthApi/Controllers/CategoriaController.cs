@@ -1,31 +1,30 @@
-﻿using Domain.Constants;
+﻿using System.Net;
 using Domain.Entities;
-using Microsoft.AspNetCore.Mvc;
+using Domain.Constants;
 using Service.Interfaces;
-using System.Net;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AuthApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProdutoController : ControllerBase
+    public class CategoriaController : ControllerBase
     {
-        private readonly IProdutoService _produtoService;
+        private readonly ICategoriaService _categoriaService;
 
-        // Injeção de dependência da camada de serviço
-        public ProdutoController(IProdutoService produtoService)
+        public CategoriaController(ICategoriaService categoriaService)
         {
-            _produtoService = produtoService;
+            _categoriaService = categoriaService;
         }
 
-        // GET api/produto
+        // GET api/categoria
         [HttpGet]
         public async Task<IActionResult> Get()
         {
             try
             {
-                var produtos = await _produtoService.ObterTodosAsync();
-                return Ok(produtos); // Retorna 200 com os produtos
+                var categorias = await _categoriaService.ObterTodosAsync();
+                return Ok(categorias); // Retorna 200 com os categorias
             }
             catch (Exception ex)
             {
@@ -34,14 +33,14 @@ namespace AuthApi.Controllers
             }
         }
 
-        // GET api/produto/{id}
+        // GET api/categoria/{id}
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
             try
             {
-                var produto = await _produtoService.ObterPorIdAsync(id);
-                return Ok(produto); // Retorna 200 com o produto
+                var categoria = await _categoriaService.ObterPorIdAsync(id);
+                return Ok(categoria); // Retorna 200 com o categoria
             }
             catch (Exception ex)
             {
@@ -50,19 +49,19 @@ namespace AuthApi.Controllers
             }
         }
 
-        // POST api/produto
+        // POST api/categoria
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Produto produto)
+        public async Task<IActionResult> Post([FromBody] Categoria categoria)
         {
-            if (produto == null)
+            if (categoria == null)
             {
-                return BadRequest(new { message = MensagensErro.ProdutoInvalido }); // Retorna 400 se o produto não for enviado corretamente
+                return BadRequest(new { message = MensagensErro.CategoriaInvalida }); // Retorna 400 se o categoria não for enviado corretamente
             }
 
             try
             {
-                await _produtoService.AdicionarAsync(produto); // Cria o produto
-                return CreatedAtAction(nameof(Get), new { id = produto.Id }, produto); // Retorna 201
+                await _categoriaService.AdicionarAsync(categoria); // Cria o categoria
+                return CreatedAtAction(nameof(Get), new { id = categoria.Id }, categoria); // Retorna 201
             }
             catch (Exception ex)
             {
@@ -71,18 +70,18 @@ namespace AuthApi.Controllers
             }
         }
 
-        // PUT api/produto/{id}
+        // PUT api/categoria/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] Produto produto)
+        public async Task<IActionResult> Put(int id, [FromBody] Categoria categoria)
         {
-            if (produto == null || produto.Id != id)
+            if (categoria == null || categoria.Id != id)
             {
                 return BadRequest(new { message = MensagensErro.DadosInvalidos }); // Verifica se os dados são válidos
             }
 
             try
             {
-                var updatedProduto = await _produtoService.AtualizarAsync(produto);
+                var updatedCategoria = await _categoriaService.AtualizarAsync(categoria);
                 return NoContent(); // Retorna 204 se a atualização for bem-sucedida
             }
             catch (Exception ex)
@@ -92,13 +91,13 @@ namespace AuthApi.Controllers
             }
         }
 
-        // DELETE api/produto/{id}
+        // DELETE api/categoria/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             try
             {
-                await _produtoService.RemoverAsync(id); // Exclui o produto
+                await _categoriaService.RemoverAsync(id); // Exclui o categoria
                 return NoContent(); // Retorna 204 após a exclusão
             }
             catch (Exception ex)

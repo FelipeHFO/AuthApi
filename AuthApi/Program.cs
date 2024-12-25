@@ -15,6 +15,7 @@ builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 // Registrar serviços
 builder.Services.AddScoped<IProdutoService, ProdutoService>();
+builder.Services.AddScoped<ICategoriaService, CategoriaService>();
 
 // Adicionar controllers
 builder.Services.AddControllers();  // Adicionar o serviço para os controladores

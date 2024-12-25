@@ -1,7 +1,7 @@
-﻿using Domain.Entities;
-using Domain.Constants;
-using Service.Interfaces;
+﻿using Domain.Constants;
+using Domain.Entities;
 using Repository.Interfaces;
+using Service.Interfaces;
 
 namespace Service.Implementations
 {
@@ -32,7 +32,7 @@ namespace Service.Implementations
 
             if (produto == null)
             {
-                throw new KeyNotFoundException(MensagensErro.ProdutoNaoEncontrado);
+                throw new KeyNotFoundException(MensagensErro.EntidadeNaoEncontrada);
             }
 
             return produto;
@@ -49,7 +49,7 @@ namespace Service.Implementations
 
             if (existente == null)
             {
-                throw new KeyNotFoundException(MensagensErro.ProdutoNaoEncontrado);
+                throw new KeyNotFoundException(MensagensErro.EntidadeNaoEncontrada);
             }
 
             return await _repository.AtualizarAsync(produto);
@@ -61,7 +61,7 @@ namespace Service.Implementations
 
             if (produto == null)
             {
-                throw new KeyNotFoundException(MensagensErro.ProdutoNaoEncontrado);
+                throw new KeyNotFoundException(MensagensErro.EntidadeNaoEncontrada);
             }
 
             return await _repository.RemoverAsync(id);

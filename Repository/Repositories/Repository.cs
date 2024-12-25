@@ -1,6 +1,6 @@
-﻿using Repository.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using Repository.Context;
 using Repository.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 public class Repository<T> : IRepository<T> where T : class
 {
