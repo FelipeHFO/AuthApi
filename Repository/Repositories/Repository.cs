@@ -20,7 +20,15 @@ public class Repository<T> : IRepository<T> where T : class
 
     public async Task<T> ObterPorIdAsync(int id)
     {
-        return await _dbSet.FindAsync(id);
+        var entity = await _dbSet.FindAsync(id);
+
+        if (entity != null)
+        {
+            // Desanexa a instância, para evitar o conflito de rastreamento
+            _context.Entry(entity).State = EntityState.Detached;
+        }
+
+        return entity;
     }
 
     public async Task<T> AdicionarAsync(T entidade)

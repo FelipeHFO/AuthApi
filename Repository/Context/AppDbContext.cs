@@ -37,7 +37,8 @@ namespace Repository.Context
                 .HasOne(p => p.Categoria) // Produto tem 1 Categoria
                 .WithMany(c => c.Produtos) // Categoria tem muitos Produtos
                 .HasForeignKey(p => p.CategoriaId) // Produto usa CategoriaId como chave estrangeira
-                .OnDelete(DeleteBehavior.Restrict); // Evita exclusão em cascata
+                .OnDelete(DeleteBehavior.Restrict) // Evita exclusão em cascata
+                .IsRequired(); 
 
             // Configurar as colunas de auditoria
             modelBuilder.Entity<Categoria>()

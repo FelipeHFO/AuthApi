@@ -19,7 +19,7 @@
 
         public int CategoriaId { get; set; }
 
-        public Categoria Categoria { get; set; } // Navegação para Categoria
+        public Categoria? Categoria { get; set; } // Navegação para Categoria
         #endregion
     }
 }
